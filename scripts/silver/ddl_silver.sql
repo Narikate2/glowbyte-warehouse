@@ -34,6 +34,7 @@ go
 
 create table silver.crm_prd_info (
 	prd_id			int,
+	cat_id			nvarchar(50),
 	prd_key			nvarchar(50),
 	prd_nm			nvarchar(50),
 	prd_cost		int,
@@ -41,8 +42,7 @@ create table silver.crm_prd_info (
 	prd_start_dt	date,
 	prd_end_dt		date,
 dwh_create_date		datetime2 default getdate()
-
-);
+	);
 go
 
 drop table if exists silver.crm_sales_details;
