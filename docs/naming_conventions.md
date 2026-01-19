@@ -1,52 +1,52 @@
 # **Naming Conventions**
 
-This document outlines the naming conventions used for schemas, tables, views, columns, and other objects in the data warehouse.
+В этом документе описываются соглашения об именовании, используемые для схем, таблиц, представлений, столбцов и других объектов.
 
-## **Table of Contents**
+## **содержание**
 
-1. [General Principles](#general-principles)
-2. [Table Naming Conventions](#table-naming-conventions)
-   - [Bronze Rules](#bronze-rules)
-   - [Silver Rules](#silver-rules)
-   - [Gold Rules](#gold-rules)
-3. [Column Naming Conventions](#column-naming-conventions)
-   - [Surrogate Keys](#surrogate-keys)
-   - [Technical Columns](#technical-columns)
-4. [Stored Procedure](#stored-procedure-naming-conventions)
+1. [Общие принципы] (#Общие-принципы)
+2. [Соглашения об именовании таблиц] (#table-naming-conventions)
+   - [Бронзовые правила] (#bronze-rules)
+   - [Серебряные правила] (#silver-rules)
+   - [Золотые правила] (#gold-rules)
+3. [Соглашения об именовании столбцов] (#column-naming-conventions)
+   - [Суррогатные ключи](#surrogate-keys)
+   - [Технические столбцы] (#technical-columns)
+4. [Хранимая процедура] (#соглашения об именовании хранимых процедур)
 ---
 
-## **General Principles**
+## **Общие принципы**
 
-- **Naming Conventions**: Use snake_case, with lowercase letters and underscores (`_`) to separate words.
-- **Language**: Use English for all names.
-- **Avoid Reserved Words**: Do not use SQL reserved words as object names.
+- ** Соглашения об именовании **: Используйте snake_case, со строчными буквами и символами подчеркивания ("_") для разделения слов.
+- **Язык **: Используйте английский для всех имен.
+- ** Избегайте зарезервированных слов **: Не используйте зарезервированные слова SQL в качестве имен объектов.
 
 ## **Table Naming Conventions**
 
-### **Bronze Rules**
-- All names must start with the source system name, and table names must match their original names without renaming.
-- **`<sourcesystem>_<entity>`**  
-  - `<sourcesystem>`: Name of the source system (e.g., `crm`, `erp`).  
-  - `<entity>`: Exact table name from the source system.  
-  - Example: `crm_customer_info` → Customer information from the CRM system.
+### **Правила Bronze**
+- Все имена должны начинаться с имени исходной системы, а имена таблиц должны совпадать с их исходными именами без переименования.
+- **`<исходная система>_<сущность>`**  
+  - `<исходная система>": название исходной системы (например, `crm`, `erp`).  
+  - "<сущность>": точное название таблицы из исходной системы.  
+  - Пример: "crm_customer_info" → Информация о клиенте из CRM-системы.
 
-### **Silver Rules**
-- All names must start with the source system name, and table names must match their original names without renaming.
-- **`<sourcesystem>_<entity>`**  
-  - `<sourcesystem>`: Name of the source system (e.g., `crm`, `erp`).  
-  - `<entity>`: Exact table name from the source system.  
-  - Example: `crm_customer_info` → Customer information from the CRM system.
+### **Правила Silver**
+- Все имена должны начинаться с имени исходной системы, а имена таблиц должны совпадать с их исходными именами без переименования.
+- **`<исходная система>_<сущность>`**  
+  - `<исходная система>": название исходной системы (например, `crm`, `erp`).  
+  - "<сущность>": точное название таблицы из исходной системы.  
+  - Пример: "crm_customer_info" → Информация о клиенте из CRM-системы.
 
-### **Gold Rules**
-- All names must use meaningful, business-aligned names for tables, starting with the category prefix.
-- **`<category>_<entity>`**  
-  - `<category>`: Describes the role of the table, such as `dim` (dimension) or `fact` (fact table).  
-  - `<entity>`: Descriptive name of the table, aligned with the business domain (e.g., `customers`, `products`, `sales`).  
-  - Examples:
-    - `dim_customers` → Dimension table for customer data.  
-    - `fact_sales` → Fact table containing sales transactions.  
+### **Золотые правила**
+- Все названия таблиц должны содержать значимые, ориентированные на бизнес названия, начинающиеся с префикса категории.
+- **`<категория>_<сущность>`**  
+  - `<категория>": описывает роль таблицы, например, "dim` (измерение) или `fact` (таблица фактов).  
+  - "<сущность>": описательное название таблицы, приведенное в соответствие с бизнес-областью (например, "клиенты", "продукты", "продажи").  
+  - Примеры:
+    - "dim_customers" → Таблица измерений для данных о клиентах.  
+    - `fact_sales` → Таблица фактов, содержащая транзакции продажи.  
 
-#### **Glossary of Category Patterns**
+#### **Глоссарий шаблонов категорий**
 
 | Pattern     | Meaning                           | Example(s)                              |
 |-------------|-----------------------------------|-----------------------------------------|
@@ -54,28 +54,28 @@ This document outlines the naming conventions used for schemas, tables, views, c
 | `fact_`     | Fact table                       | `fact_sales`                            |
 | `report_`   | Report table                     | `report_customers`, `report_sales_monthly`   |
 
-## **Column Naming Conventions**
+## **Соглашения об именовании столбцов**
 
-### **Surrogate Keys**  
-- All primary keys in dimension tables must use the suffix `_key`.
-- **`<table_name>_key`**  
-  - `<table_name>`: Refers to the name of the table or entity the key belongs to.  
-  - `_key`: A suffix indicating that this column is a surrogate key.  
-  - Example: `customer_key` → Surrogate key in the `dim_customers` table.
+### **Суррогатные ключи**  
+- Все первичные ключи в таблицах измерений должны содержать суффикс "_key".
+- **"<имя_таблицы>_key".**  
+  - `<имя_таблицы>`: указывает на имя таблицы или объекта, к которому принадлежит ключ.  
+  - `_key`: Суффикс, указывающий на то, что этот столбец является суррогатным ключом.  
+  - Пример: `customer_key` → Суррогатный ключ в таблице `dim_customers`.
   
-### **Technical Columns**
-- All technical columns must start with the prefix `dwh_`, followed by a descriptive name indicating the column's purpose.
-- **`dwh_<column_name>`**  
-  - `dwh`: Prefix exclusively for system-generated metadata.  
-  - `<column_name>`: Descriptive name indicating the column's purpose.  
-  - Example: `dwh_load_date` → System-generated column used to store the date when the record was loaded.
+### **Технические столбцы**
+- Все технические столбцы должны начинаться с префикса "dwh_", за которым следует описательное название, указывающее назначение столбца.
+- **"dwh_<имя_колонки>"**  
+  - "dwh": префикс исключительно для метаданных, сгенерированных системой.  
+  - `<имя_колонки>`: Описательное имя, указывающее назначение столбца.  
+  - Пример: `dwh_load_date` → Сгенерированный системой столбец, используемый для хранения даты загрузки записи.
  
-## **Stored Procedure**
+## **Хранимая процедура**
 
-- All stored procedures used for loading data must follow the naming pattern:
-- **`load_<layer>`**.
+- Все хранимые процедуры, используемые для загрузки данных, должны соответствовать шаблону именования:
+- **`load_<слой>`**.
   
-  - `<layer>`: Represents the layer being loaded, such as `bronze`, `silver`, or `gold`.
-  - Example: 
-    - `load_bronze` → Stored procedure for loading data into the Bronze layer.
-    - `load_silver` → Stored procedure for loading data into the Silver layer.
+  - "<слой>": представляет загружаемый слой, например `бронзовый`, `серебряный` или `золотой`.
+  - Пример: 
+    - `load_bronze` → Хранимая процедура для загрузки данных в слой Bronze.
+    - `load_silver` → Хранимая процедура для загрузки данных в слой Silver.
