@@ -18,9 +18,9 @@
 | last_name        | NVARCHAR(50)  | Фамилия или отчество клиента.                                                                            |
 | country          | NVARCHAR(50)  | Страна проживания клиента (например, "Австралия").                                                       |
 | marital_status   | NVARCHAR(50)  | Семейное положение клиента (например, "Женат", "Холост").                                                |
-| gender           | NVARCHAR(50)  | The gender of the customer (e.g., 'Male', 'Female', 'n/a').                                              |
-| birthdate        | DATE          | The date of birth of the customer, formatted as YYYY-MM-DD (e.g., 1971-10-06).                           |
-| create_date      | DATE          | The date and time when the customer record was created in the system                                     |
+| gender           | NVARCHAR(50)  | Пол клиента (например, "Мужчина", "Женщина", "нет").                                                     |
+| birthdate        | DATE          | Дата рождения клиента, отформатированная как ГГГГ-ММ-ДД (например, 1971-10-06).                           |
+| create_date      | DATE          | Дата и время, когда в системе была создана запись о клиенте                                               |
 
 ---
 
